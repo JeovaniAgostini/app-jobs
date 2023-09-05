@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { callGetAllJobs, searchById } from "../../redux/jobsSlice";
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { Link } from "react-router-dom";
+import { formatDate } from "../../utils/formatDate";
 
 function Jobs() {
     const dispatch = useAppDispatch();
@@ -12,12 +13,6 @@ function Jobs() {
     useEffect(() => {
         dispatch(callGetAllJobs())
     }, [])
-
-    const formatDate = (dateParam: string) => {
-        const splitDateParam = dateParam.split("-");
-        const dateFormatted = splitDateParam[1] + "/" + splitDateParam[2] + "/" + splitDateParam[0];
-        return dateFormatted;
-    }
 
     const saveSelected = (number: Number) => {
         dispatch(searchById(number))

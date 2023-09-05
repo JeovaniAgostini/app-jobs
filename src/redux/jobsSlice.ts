@@ -67,7 +67,7 @@ interface JobPost {
 
 export interface JobsState {
     jobsList: JobPost[];
-    selectedJob: Object | null;
+    selectedJob: JobPost | null;
     loading: boolean;
     error: boolean;
 }
