@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from './styles/global';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import RoutesList from "./pages/routes";
+import { ClerkProvider } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
+
+if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+    throw new Error("Missing Publishable Key")
+}
+
+const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    const navigate = useNavigate();
+
+    return (
+        <ClerkProvider
+            publishableKey={clerkPubKey}
+            navigate={(to) => navigate(to)}
+            appearance={{
+                variables: {
+                    colorPrimary: "#0c2c48",
+                    colorText: "#0c2c48",
+                    fontFamily: "IBM Plex Serif",
+                    fontSize: "18px"
+                }
+            }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+            <GlobalStyle />
+            <Header />
+            <RoutesList />
+            <Footer />
+        </ClerkProvider>
+    );
+};
 
 export default App;
