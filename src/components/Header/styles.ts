@@ -7,6 +7,7 @@ interface MenuMobileProps {
 export const Container = styled.div`
     background: #fbfbfb;
     padding: 30px;
+    box-shadow: 0px 1px 0px #f3f3f3;
 
     header {
         width: 1120px;
